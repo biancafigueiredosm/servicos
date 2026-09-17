@@ -1,10 +1,14 @@
 document.addEventListener('DOMContentLoaded',()=>{
   const brand=document.querySelector('.brand');
   const logo=document.querySelector('.logo-wrap');
-  const footer=document.querySelector('.closing strong');
+  const footer=document.querySelector('.closing');
   if(brand) brand.textContent='studio / 01';
   if(logo){logo.replaceChildren();logo.setAttribute('aria-hidden','true')}
-  if(footer) footer.textContent='';
+  if(footer) footer.remove();
+  const assessoria=document.querySelector('.nav > .portal:first-of-type');
+  if(assessoria) assessoria.querySelector('.icon').textContent='✦';
+  const proposta=document.querySelector('.nav > .portal:last-of-type');
+  if(proposta) proposta.querySelector('.icon').textContent='◎';
   const proposal=document.querySelector('a[href*="social-media-proposal-demo"]');
   if(proposal) proposal.href='https://www.propostamagnetica.com/';
 
@@ -15,7 +19,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     accordion.className='services-accordion';
     accordion.innerHTML=`
       <button class="portal services-trigger" type="button" aria-expanded="false" aria-controls="services-list">
-        <span class="icon">02</span>
+        <span class="icon">◇</span>
         <span class="copy"><b>NOSSOS SERVIÇOS</b><small>Toque para conhecer todas as soluções</small></span>
         <span class="arrow" aria-hidden="true">↗</span>
       </button>
