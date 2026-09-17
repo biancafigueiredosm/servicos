@@ -1,0 +1,31 @@
+:root{--bg:#030303}
+html,body{background:#030303}
+body:before{background:radial-gradient(ellipse 72% 44% at 94% 12%,rgba(255,255,255,.055),transparent 64%),radial-gradient(ellipse 55% 38% at 4% 68%,rgba(255,63,136,.05),transparent 70%),#030303}
+body:after{display:none}
+.grid{opacity:1;background-image:radial-gradient(circle,rgba(255,255,255,.32) 0 1px,transparent 1.25px);background-size:48px 48px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.88),rgba(0,0,0,.16) 72%,transparent)}
+.grid:before,.grid:after{content:"";position:absolute;border-radius:50%;pointer-events:none}
+.grid:before{width:90vw;height:38vw;right:-24vw;top:7vh;transform:rotate(-12deg);background:radial-gradient(ellipse,rgba(255,255,255,.13),rgba(255,255,255,.025) 40%,transparent 70%)}
+.grid:after{width:82vw;height:34vw;left:-30vw;bottom:3vh;transform:rotate(18deg);background:radial-gradient(ellipse,rgba(255,63,136,.075),rgba(255,255,255,.018) 45%,transparent 72%)}
+.orb{top:-480px;width:min(1100px,155vw);border-color:rgba(255,255,255,.05);box-shadow:none}
+.orb:before{border-color:rgba(255,255,255,.025)}
+.brand{font-size:0}.brand:after{content:"studio / 01";font-size:1rem;letter-spacing:-.04em}
+.logo-wrap{display:grid;place-items:center;background:rgba(255,255,255,.025);backdrop-filter:blur(16px)}
+.logo{display:none}
+.logo-wrap:after{content:"";position:relative;width:40px;height:40px;border:1px solid rgba(255,118,170,.72);border-radius:50%;background:linear-gradient(90deg,transparent calc(50% - .5px),var(--pink2) 50%,transparent calc(50% + .5px)),linear-gradient(transparent calc(50% - .5px),var(--pink2) 50%,transparent calc(50% + .5px));box-shadow:0 0 26px rgba(255,63,136,.2)}
+.closing strong{font-size:0}.closing strong:after{content:"ASSESSORIA DE COMUNICAÇÃO ESTRATÉGICA";font-size:.65rem}
+.top,.logo-wrap,.pill{display:none!important}
+.hero{padding-top:clamp(72px,12vh,130px)}
+.services{display:none!important}
+.services-accordion{display:grid;overflow:hidden;border-radius:18px}
+.services-trigger{width:100%;cursor:pointer;color:inherit;font:inherit}
+.services-trigger .arrow{transition:transform .4s var(--ease),background .3s}
+.services-accordion.open .services-trigger{border-color:rgba(255,63,136,.5);border-radius:18px 18px 0 0;background:linear-gradient(110deg,rgba(255,63,136,.09),rgba(255,255,255,.025))}
+.services-accordion.open .services-trigger .arrow{transform:rotate(135deg);background:rgba(255,63,136,.12)}
+.services-panel{display:grid;grid-template-rows:0fr;opacity:0;border:1px solid transparent;border-top:0;border-radius:0 0 18px 18px;background:rgba(8,6,9,.9);transition:grid-template-rows .55s var(--ease),opacity .35s,border-color .35s}
+.services-panel ol{min-height:0;margin:0;padding:0 16px;overflow:hidden;list-style:none;text-align:left}
+.services-accordion.open .services-panel{grid-template-rows:1fr;opacity:1;border-color:rgba(255,63,136,.3)}
+.services-accordion.open .services-panel ol{padding-top:10px;padding-bottom:12px}
+.services-panel li{display:grid;grid-template-columns:34px 1fr;align-items:center;min-height:51px;border-bottom:1px solid rgba(255,255,255,.075);transform:translateY(-8px);opacity:0;transition:transform .35s var(--ease),opacity .35s}
+.services-panel li:last-child{border-bottom:0}.services-panel li span{color:var(--pink2);font-size:.61rem;letter-spacing:.1em}.services-panel li b{font-size:.78rem;font-weight:500}.services-panel li small{grid-column:2;color:var(--muted);font-size:.62rem;margin-top:-11px;margin-bottom:7px}
+.services-accordion.open .services-panel li{transform:none;opacity:1}.services-accordion.open .services-panel li:nth-child(2){transition-delay:.035s}.services-accordion.open .services-panel li:nth-child(3){transition-delay:.07s}.services-accordion.open .services-panel li:nth-child(4){transition-delay:.105s}.services-accordion.open .services-panel li:nth-child(5){transition-delay:.14s}.services-accordion.open .services-panel li:nth-child(6){transition-delay:.175s}.services-accordion.open .services-panel li:nth-child(7){transition-delay:.21s}.services-accordion.open .services-panel li:nth-child(8){transition-delay:.245s}
+@media(max-width:520px){.grid{background-size:38px 38px}.grid:before{width:150vw;height:70vw;right:-70vw}.grid:after{width:140vw;height:65vw;left:-75vw}}
