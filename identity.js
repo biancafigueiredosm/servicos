@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   const footer=document.querySelector('.closing strong');
   if(brand) brand.textContent='studio / 01';
   if(logo){logo.replaceChildren();logo.setAttribute('aria-hidden','true')}
-  if(footer) footer.textContent='ASSESSORIA DE COMUNICAÇÃO ESTRATÉGICA';
+  if(footer) footer.textContent='';
   const proposal=document.querySelector('a[href*="social-media-proposal-demo"]');
   if(proposal) proposal.href='https://www.propostamagnetica.com/';
 
