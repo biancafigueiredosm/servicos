@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   const servicesLink=document.querySelector('a[href="#servicos"]');
   if(servicesLink){
     const accordion=document.createElement('div');
+    const whatsapp=service=>`https://wa.me/5521968103478?text=${encodeURIComponent(`Olá! Preciso de ${service} e quero saber mais informações.`)}`;
     accordion.className='services-accordion';
     accordion.innerHTML=`
       <button class="portal services-trigger" type="button" aria-expanded="false" aria-controls="services-list">
@@ -20,14 +21,14 @@ document.addEventListener('DOMContentLoaded',()=>{
       </button>
       <div class="services-panel" id="services-list" aria-hidden="true">
         <ol>
-          <li><span>01</span><b>Posicionamento</b></li>
-          <li><span>02</span><b>Análise assertiva</b><small>Análise estratégica de marca</small></li>
-          <li><span>03</span><b>Tráfego Pago</b></li>
-          <li><span>04</span><b>Captação Audiovisual</b></li>
-          <li><span>05</span><b>Materiais Criativos</b></li>
-          <li><span>06</span><b>Consultoria</b></li>
-          <li><span>07</span><b>Soluções com IA</b></li>
-          <li><span>08</span><b>Identidade Visual</b></li>
+          <li><a href="${whatsapp('posicionamento de marca')}" target="_blank" rel="noopener"><span>01</span><b>Posicionamento</b></a></li>
+          <li><a href="${whatsapp('uma análise assertiva da minha marca')}" target="_blank" rel="noopener"><span>02</span><b>Análise assertiva</b><small>Análise estratégica de marca</small></a></li>
+          <li><a href="${whatsapp('tráfego pago')}" target="_blank" rel="noopener"><span>03</span><b>Tráfego Pago</b></a></li>
+          <li><a href="${whatsapp('captação audiovisual')}" target="_blank" rel="noopener"><span>04</span><b>Captação Audiovisual</b></a></li>
+          <li><a href="${whatsapp('materiais criativos')}" target="_blank" rel="noopener"><span>05</span><b>Materiais Criativos</b></a></li>
+          <li><a href="${whatsapp('consultoria')}" target="_blank" rel="noopener"><span>06</span><b>Consultoria</b></a></li>
+          <li><a href="${whatsapp('soluções com IA')}" target="_blank" rel="noopener"><span>07</span><b>Soluções com IA</b></a></li>
+          <li><a href="${whatsapp('identidade visual')}" target="_blank" rel="noopener"><span>08</span><b>Identidade Visual</b></a></li>
         </ol>
       </div>`;
     servicesLink.replaceWith(accordion);
