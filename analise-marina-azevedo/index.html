@@ -1,0 +1,1089 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#151515">
+  <meta name="description" content="Análise de desempenho de conteúdo de Marina Azevedo, psicóloga.">
+  <meta property="og:title" content="Análise de conteúdo — Marina Azevedo">
+  <meta property="og:description" content="O que 46.750 visualizações revelam sobre descoberta, repetição e vínculo.">
+  <title>Análise de conteúdo — Marina Azevedo</title>
+  <style>
+    :root {
+      --bc-coal: #151515;
+      --bc-coal-soft: #1d1c1d;
+      --bc-pink: #f4c9d8;
+      --bc-white: #fffdfb;
+      --bc-support: #e7a7be;
+      --bc-deep: #a85f79;
+      --bc-muted: rgba(255, 253, 251, 0.64);
+      --bc-line: rgba(255, 253, 251, 0.15);
+      --bc-line-pink: rgba(244, 201, 216, 0.3);
+      --bc-max: 1180px;
+      --bc-pad: clamp(1.25rem, 4vw, 4rem);
+      --bc-radius: 1.5rem;
+      --bc-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      background: var(--bc-coal);
+      color-scheme: dark;
+      scroll-behavior: smooth;
+      overflow-x: clip;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      overflow-x: clip;
+      background: var(--bc-coal);
+      color: var(--bc-white);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: clamp(1rem, 0.96rem + 0.2vw, 1.12rem);
+      line-height: 1.55;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: inherit; }
+
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    .skip-link {
+      position: fixed;
+      z-index: 100;
+      top: 0.75rem;
+      left: 0.75rem;
+      padding: 0.7rem 1rem;
+      border-radius: 999px;
+      background: var(--bc-white);
+      color: var(--bc-coal);
+      font-weight: 750;
+      transform: translateY(-180%);
+      transition: transform 180ms ease;
+    }
+
+    .skip-link:focus { transform: translateY(0); }
+
+    .progress {
+      position: fixed;
+      z-index: 90;
+      inset: 0 0 auto;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .progress__bar {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--bc-deep), var(--bc-pink));
+      transform-origin: left center;
+      transition: width 100ms linear;
+    }
+
+    .topbar {
+      position: fixed;
+      z-index: 80;
+      top: 1rem;
+      right: max(1rem, env(safe-area-inset-right));
+      left: max(1rem, env(safe-area-inset-left));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: var(--bc-max);
+      margin-inline: auto;
+      pointer-events: none;
+    }
+
+    .topbar__identity,
+    .section-nav {
+      pointer-events: auto;
+      border: 1px solid var(--bc-line);
+      background: rgba(21, 21, 21, 0.8);
+      box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(14px);
+    }
+
+    .topbar__identity {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      min-height: 2.35rem;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 750;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .topbar__identity::before {
+      content: "";
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 50%;
+      background: var(--bc-pink);
+    }
+
+    .section-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.4rem;
+      border-radius: 999px;
+    }
+
+    .section-nav a {
+      display: grid;
+      width: 1.7rem;
+      height: 1.7rem;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--bc-muted);
+      font-size: 0.68rem;
+      font-variant-numeric: tabular-nums;
+      text-decoration: none;
+      transition: color 220ms ease, background 220ms ease, transform 220ms ease;
+    }
+
+    .section-nav a:hover,
+    .section-nav a:focus-visible {
+      color: var(--bc-white);
+      background: rgba(255, 255, 255, 0.1);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .section-nav a[aria-current="true"] {
+      background: var(--bc-pink);
+      color: var(--bc-coal);
+      font-weight: 800;
+    }
+
+    main { position: relative; }
+
+    .panel {
+      position: relative;
+      min-height: 100svh;
+      display: grid;
+      align-items: center;
+      padding: clamp(6rem, 10vh, 8rem) var(--bc-pad) clamp(4rem, 8vh, 7rem);
+      isolation: isolate;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .panel__inner {
+      width: min(100%, var(--bc-max));
+      margin-inline: auto;
+    }
+
+    .panel__number {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: clamp(1.5rem, 3vw, 2.8rem);
+      color: var(--bc-support);
+      font-size: 0.72rem;
+      font-weight: 780;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .panel__number::after {
+      content: "";
+      width: clamp(2.5rem, 8vw, 7.5rem);
+      height: 1px;
+      background: currentColor;
+      opacity: 0.65;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1, h2, h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 500;
+      letter-spacing: -0.045em;
+    }
+
+    h1 {
+      max-width: 12ch;
+      margin-bottom: 1.4rem;
+      font-size: clamp(3.8rem, 10.8vw, 9rem);
+      line-height: 0.88;
+    }
+
+    h2 {
+      max-width: 12ch;
+      margin-bottom: clamp(1.5rem, 3vw, 2.4rem);
+      font-size: clamp(2.65rem, 7vw, 6.6rem);
+      line-height: 0.95;
+    }
+
+    h3 {
+      margin-bottom: 0.7rem;
+      font-size: clamp(1.35rem, 2.4vw, 2rem);
+      line-height: 1.1;
+    }
+
+    p { max-width: 65ch; }
+
+    .lead {
+      max-width: 58ch;
+      color: var(--bc-muted);
+      font-size: clamp(1.1rem, 1rem + 0.65vw, 1.55rem);
+      line-height: 1.45;
+    }
+
+    .eyebrow {
+      margin-bottom: 1rem;
+      color: var(--bc-pink);
+      font-size: 0.76rem;
+      font-weight: 780;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .micro {
+      color: var(--bc-muted);
+      font-size: 0.86rem;
+      line-height: 1.5;
+    }
+
+    .accent { color: var(--bc-pink); }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: min(63vw, 47rem);
+      aspect-ratio: 1;
+      right: min(-18vw, -5rem);
+      top: 50%;
+      border: 1px solid var(--bc-line-pink);
+      border-radius: 50%;
+      transform: translateY(-50%);
+      box-shadow: 0 0 0 clamp(2rem, 7vw, 6rem) rgba(244, 201, 216, 0.025),
+                  0 0 0 clamp(6rem, 15vw, 13rem) rgba(244, 201, 216, 0.018);
+    }
+
+    .hero__grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(14rem, 0.38fr);
+      gap: clamp(2rem, 7vw, 7rem);
+      align-items: end;
+    }
+
+    .hero__meta {
+      padding: 1.5rem 0 0 1.3rem;
+      border-left: 1px solid var(--bc-support);
+    }
+
+    .hero__meta p { margin-bottom: 0.3rem; }
+
+    .hero__meta strong {
+      display: block;
+      margin-bottom: 0.75rem;
+      color: var(--bc-white);
+      font-size: 1rem;
+    }
+
+    .scroll-note {
+      position: absolute;
+      right: var(--bc-pad);
+      bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      color: var(--bc-muted);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .scroll-note::before {
+      content: "";
+      width: 2.2rem;
+      height: 1px;
+      background: var(--bc-support);
+    }
+
+    .overview { background: var(--bc-white); color: var(--bc-coal); }
+    .overview .panel__number, .overview .eyebrow { color: var(--bc-deep); }
+    .overview .lead, .overview .micro { color: rgba(21, 21, 21, 0.66); }
+
+    .metric-stage {
+      display: grid;
+      grid-template-columns: 1.35fr 0.9fr;
+      gap: clamp(2rem, 7vw, 7rem);
+      align-items: end;
+    }
+
+    .metric-primary__value {
+      display: block;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(5rem, 15vw, 12rem);
+      line-height: 0.78;
+      letter-spacing: -0.075em;
+    }
+
+    .metric-primary__label {
+      display: block;
+      max-width: 28rem;
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(21, 21, 21, 0.2);
+      font-weight: 700;
+    }
+
+    .metric-secondary {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid rgba(21, 21, 21, 0.22);
+    }
+
+    .metric-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.3rem 0;
+      border-bottom: 1px solid rgba(21, 21, 21, 0.22);
+    }
+
+    .metric-row strong {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      font-weight: 500;
+      letter-spacing: -0.05em;
+    }
+
+    .metric-row span { max-width: 12ch; color: rgba(21, 21, 21, 0.62); text-align: right; }
+
+    .repetition {
+      background:
+        radial-gradient(circle at 80% 35%, rgba(168, 95, 121, 0.24), transparent 32rem),
+        var(--bc-coal);
+    }
+
+    .repeat-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(20rem, 1.15fr);
+      gap: clamp(2.5rem, 8vw, 8rem);
+      align-items: center;
+    }
+
+    .repeat-visual {
+      position: relative;
+      width: min(100%, 34rem);
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      justify-self: end;
+    }
+
+    .repeat-visual::before,
+    .repeat-visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--bc-line-pink);
+      border-radius: 50%;
+    }
+
+    .repeat-visual::after {
+      inset: 11%;
+      border-color: var(--bc-pink);
+      border-right-color: transparent;
+      transform: rotate(-12deg);
+    }
+
+    .repeat-visual__number {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(6rem, 16vw, 12rem);
+      line-height: 0.8;
+      letter-spacing: -0.08em;
+    }
+
+    .repeat-visual__label {
+      position: absolute;
+      bottom: 18%;
+      width: 12rem;
+      color: var(--bc-muted);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .interpretation {
+      margin-top: 2rem;
+      padding-left: 1.25rem;
+      border-left: 3px solid var(--bc-support);
+      color: var(--bc-white);
+      font-size: clamp(1.1rem, 1rem + 0.4vw, 1.35rem);
+    }
+
+    .interactions {
+      background: var(--bc-pink);
+      color: var(--bc-coal);
+    }
+
+    .interactions .panel__number, .interactions .eyebrow { color: #713d50; }
+    .interactions .lead, .interactions .micro { color: rgba(21, 21, 21, 0.68); }
+
+    .interaction-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.78fr) minmax(22rem, 1.22fr);
+      gap: clamp(2.5rem, 8vw, 8rem);
+      align-items: end;
+    }
+
+    .bars {
+      display: grid;
+      gap: 1.05rem;
+      align-self: center;
+    }
+
+    .bar-item {
+      display: grid;
+      grid-template-columns: minmax(7.5rem, 1fr) minmax(8rem, 3fr) 3rem;
+      gap: 0.9rem;
+      align-items: center;
+    }
+
+    .bar-item__label { font-size: 0.82rem; font-weight: 720; }
+
+    .bar-item__track {
+      height: clamp(0.55rem, 1.2vw, 0.9rem);
+      overflow: hidden;
+      background: rgba(21, 21, 21, 0.12);
+      border-radius: 999px;
+    }
+
+    .bar-item__fill {
+      display: block;
+      width: var(--value);
+      height: 100%;
+      border-radius: inherit;
+      background: var(--bc-coal);
+      transform-origin: left center;
+      transform: scaleX(0);
+      transition: transform 900ms var(--bc-ease);
+    }
+
+    .is-visible .bar-item__fill { transform: scaleX(1); }
+
+    .bar-item__value {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.3rem;
+      text-align: right;
+    }
+
+    .interaction-note {
+      margin-top: 2rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid rgba(21, 21, 21, 0.22);
+      font-size: 0.95rem;
+    }
+
+    .circulation { background: #1a191a; }
+
+    .factor-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      gap: clamp(2.5rem, 8vw, 8rem);
+      align-items: start;
+    }
+
+    .factors { counter-reset: factor; border-top: 1px solid var(--bc-line); }
+
+    .factor {
+      counter-increment: factor;
+      display: grid;
+      grid-template-columns: 2.4rem minmax(0, 1fr);
+      gap: 1rem;
+      padding: clamp(1.2rem, 2.5vw, 2rem) 0;
+      border-bottom: 1px solid var(--bc-line);
+    }
+
+    .factor::before {
+      content: "0" counter(factor);
+      padding-top: 0.2rem;
+      color: var(--bc-support);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .factor p { margin-bottom: 0; color: var(--bc-muted); font-size: 0.94rem; }
+
+    .bond {
+      background: var(--bc-white);
+      color: var(--bc-coal);
+    }
+
+    .bond .panel__number, .bond .eyebrow { color: var(--bc-deep); }
+    .bond .lead, .bond .micro { color: rgba(21, 21, 21, 0.66); }
+
+    .contrast-layout {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      gap: clamp(1.5rem, 5vw, 5rem);
+      align-items: stretch;
+    }
+
+    .contrast-divider { background: rgba(21, 21, 21, 0.18); }
+
+    .contrast-block {
+      min-height: 22rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-block: 0.5rem;
+    }
+
+    .contrast-block__value {
+      display: block;
+      margin-bottom: 1rem;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(4.5rem, 11vw, 9rem);
+      line-height: 0.84;
+      letter-spacing: -0.07em;
+    }
+
+    .contrast-block__label {
+      color: rgba(21, 21, 21, 0.6);
+      font-size: 0.76rem;
+      font-weight: 760;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .contrast-block p { margin-bottom: 0; font-size: 1rem; }
+
+    .contrast-block--soft .contrast-block__value { color: var(--bc-deep); }
+
+    .positioning {
+      background:
+        linear-gradient(125deg, rgba(168, 95, 121, 0.2), transparent 42%),
+        var(--bc-coal);
+    }
+
+    .position-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+      gap: clamp(2.5rem, 8vw, 8rem);
+      align-items: center;
+    }
+
+    .position-map {
+      position: relative;
+      display: grid;
+      gap: 1rem;
+      padding-left: 2.5rem;
+    }
+
+    .position-map::before {
+      content: "";
+      position: absolute;
+      top: 1.5rem;
+      bottom: 1.5rem;
+      left: 0.7rem;
+      width: 1px;
+      background: linear-gradient(var(--bc-support), var(--bc-deep));
+    }
+
+    .position-step {
+      position: relative;
+      padding: 1.25rem 1.35rem;
+      border: 1px solid var(--bc-line);
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .position-step::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: -2.15rem;
+      width: 0.65rem;
+      height: 0.65rem;
+      border: 2px solid var(--bc-coal);
+      border-radius: 50%;
+      background: var(--bc-support);
+      box-shadow: 0 0 0 1px var(--bc-support);
+      transform: translateY(-50%);
+    }
+
+    .position-step strong { display: block; margin-bottom: 0.25rem; font-size: 1rem; }
+    .position-step p { margin-bottom: 0; color: var(--bc-muted); font-size: 0.9rem; }
+
+    .next-test { background: var(--bc-pink); color: var(--bc-coal); }
+    .next-test .panel__number, .next-test .eyebrow { color: #713d50; }
+    .next-test .lead, .next-test .micro { color: rgba(21, 21, 21, 0.68); }
+
+    .test-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+      gap: clamp(2.5rem, 8vw, 8rem);
+      align-items: start;
+    }
+
+    .decisions { counter-reset: decision; border-top: 1px solid rgba(21, 21, 21, 0.25); }
+
+    .decision {
+      counter-increment: decision;
+      display: grid;
+      grid-template-columns: clamp(2.8rem, 5vw, 4.5rem) minmax(0, 1fr);
+      gap: 1rem;
+      padding: clamp(1.25rem, 3vw, 2rem) 0;
+      border-bottom: 1px solid rgba(21, 21, 21, 0.25);
+    }
+
+    .decision::before {
+      content: "0" counter(decision);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.7rem, 3vw, 2.6rem);
+      line-height: 1;
+    }
+
+    .decision p { margin-bottom: 0; color: rgba(21, 21, 21, 0.7); font-size: 0.95rem; }
+
+    .closing-question {
+      margin: clamp(3rem, 8vw, 7rem) auto 0;
+      max-width: 18ch;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 5vw, 4.7rem);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+      text-align: center;
+    }
+
+    .signature {
+      position: absolute;
+      right: var(--bc-pad);
+      bottom: 1.35rem;
+      left: var(--bc-pad);
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(21, 21, 21, 0.2);
+      color: rgba(21, 21, 21, 0.62);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(1.5rem);
+      transition: opacity 700ms var(--bc-ease), transform 700ms var(--bc-ease);
+    }
+
+    .reveal.is-visible { opacity: 1; transform: none; }
+
+    @media (min-width: 992px) {
+      .panel { scroll-margin-top: 0; }
+      .hero__meta { margin-bottom: 1rem; }
+      .section-nav a { width: 1.85rem; height: 1.85rem; }
+    }
+
+    @media (min-width: 768px) and (max-width: 991px) {
+      .panel { padding-inline: clamp(2rem, 6vw, 4rem); }
+      .hero__grid { padding-top: 2rem; }
+    }
+
+    @media (max-width: 991px) {
+      .hero__grid,
+      .metric-stage,
+      .repeat-grid,
+      .interaction-grid,
+      .factor-layout,
+      .position-grid,
+      .test-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero__meta { max-width: 26rem; }
+      .repeat-visual { justify-self: center; width: min(85vw, 30rem); }
+      .interaction-grid, .factor-layout, .position-grid, .test-layout { gap: 2rem; }
+      .contrast-block { min-height: 18rem; }
+    }
+
+    @media (max-width: 767px) {
+      .topbar { top: 0.65rem; right: 0.65rem; left: 0.65rem; }
+      .topbar__identity { min-height: 2rem; padding-inline: 0.65rem; font-size: 0.61rem; }
+      .topbar__identity span { display: none; }
+      .section-nav { gap: 0.1rem; padding: 0.3rem; }
+      .section-nav a { width: 1.55rem; height: 1.55rem; font-size: 0.61rem; }
+      .panel { min-height: 100svh; padding-top: 5.5rem; padding-bottom: 5rem; }
+      .panel__number { margin-bottom: 1.25rem; }
+      h1 { font-size: clamp(3.45rem, 18vw, 5.6rem); }
+      h2 { max-width: 14ch; font-size: clamp(2.45rem, 13vw, 4.4rem); }
+      .hero::before { width: 120vw; right: -72vw; }
+      .scroll-note { display: none; }
+      .metric-primary__value { font-size: clamp(4.7rem, 23vw, 8rem); }
+      .metric-secondary { margin-top: 1rem; }
+      .repeat-visual { width: min(82vw, 24rem); }
+      .repeat-visual__number { font-size: clamp(5.5rem, 28vw, 9rem); }
+      .bar-item { grid-template-columns: 6.8rem minmax(4rem, 1fr) 2.4rem; gap: 0.6rem; }
+      .bar-item__label { font-size: 0.74rem; }
+      .bar-item__value { font-size: 1.05rem; }
+      .contrast-layout { grid-template-columns: 1fr; gap: 2rem; }
+      .contrast-divider { width: 100%; height: 1px; }
+      .contrast-block { min-height: auto; gap: 2.4rem; }
+      .contrast-block__value { font-size: clamp(4rem, 24vw, 7rem); }
+      .position-map { padding-left: 2rem; }
+      .position-step::before { left: -1.65rem; }
+      .closing-question { margin-top: 3.5rem; }
+      .signature { right: 1.25rem; left: 1.25rem; flex-direction: column; gap: 0.25rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal { opacity: 1; transform: none; }
+      .bar-item__fill { transform: scaleX(1); }
+    }
+
+    @media print {
+      .topbar, .progress, .scroll-note, .skip-link { display: none !important; }
+      .panel { min-height: 100vh; break-after: page; }
+      .reveal { opacity: 1; transform: none; }
+      .bar-item__fill { transform: scaleX(1); }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <div class="progress" role="progressbar" aria-label="Progresso da apresentação" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <div class="progress__bar" id="progressBar"></div>
+  </div>
+
+  <header class="topbar" aria-label="Navegação da análise">
+    <div class="topbar__identity"><span>Análise de conteúdo</span></div>
+    <nav class="section-nav" aria-label="Ir para uma seção">
+      <a href="#inicio" aria-label="Seção 1: Capa">01</a>
+      <a href="#resultado" aria-label="Seção 2: Visão geral">02</a>
+      <a href="#repeticao" aria-label="Seção 3: Sinal de repetição">03</a>
+      <a href="#interacoes" aria-label="Seção 4: Interações">04</a>
+      <a href="#circulacao" aria-label="Seção 5: Motivos da circulação">05</a>
+      <a href="#vinculo" aria-label="Seção 6: Alcance e vínculo">06</a>
+      <a href="#posicionamento" aria-label="Seção 7: Posicionamento">07</a>
+      <a href="#proximo-teste" aria-label="Seção 8: Próximo teste">08</a>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <section class="panel hero" id="inicio" aria-labelledby="titulo-inicio">
+      <div class="panel__inner hero__grid reveal">
+        <div>
+          <p class="eyebrow">Análise de desempenho de conteúdo</p>
+          <h1 id="titulo-inicio">Marina <span class="accent">Azevedo</span></h1>
+          <p class="lead">O que um Reel com 46.750 visualizações revela sobre descoberta, repetição e vínculo com o perfil.</p>
+        </div>
+        <aside class="hero__meta" aria-label="Informações da profissional">
+          <p class="micro">Cliente fictícia</p>
+          <strong>Marina Azevedo</strong>
+          <p class="micro">Psicóloga</p>
+          <p class="micro">Ansiedade, autocobrança e rotina emocional de mulheres adultas</p>
+        </aside>
+      </div>
+      <div class="scroll-note" aria-hidden="true">Role para acompanhar</div>
+    </section>
+
+    <section class="panel overview" id="resultado" aria-labelledby="titulo-resultado">
+      <div class="panel__inner reveal">
+        <div class="panel__number">02 · Visão geral</div>
+        <div class="metric-stage">
+          <div class="metric-primary">
+            <p class="eyebrow">Distribuição do Reel</p>
+            <strong class="metric-primary__value">46.750</strong>
+            <span class="metric-primary__label">visualizações, com circulação muito acima do padrão</span>
+          </div>
+          <div>
+            <div class="metric-secondary" aria-label="Métricas principais">
+              <div class="metric-row">
+                <strong>24.330</strong>
+                <span>visualizadores únicos</span>
+              </div>
+              <div class="metric-row">
+                <strong>1,92</strong>
+                <span>visualização por pessoa</span>
+              </div>
+            </div>
+            <p class="micro" style="margin-top: 1.25rem;">O alcance colocou o tema diante de muita gente. A média indica que parte desse público encontrou o vídeo novamente ou decidiu revê-lo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel repetition" id="repeticao" aria-labelledby="titulo-repeticao">
+      <div class="panel__inner repeat-grid reveal">
+        <div>
+          <div class="panel__number">03 · O sinal de repetição</div>
+          <p class="eyebrow">Quase duas vezes por pessoa</p>
+          <h2 id="titulo-repeticao">O conteúdo ganhou uma <span class="accent">segunda olhada.</span></h2>
+          <p class="lead">A relação entre 46.750 visualizações e 24.330 pessoas alcançadas chega a uma média aproximada de 1,92.</p>
+          <p class="interpretation">Esse número sugere replay ou reexposição enquanto o público consumia a informação. É um sinal de atenção, não uma prova isolada de retenção.</p>
+        </div>
+        <div class="repeat-visual" aria-label="Média aproximada de 1,92 visualização por pessoa">
+          <div class="repeat-visual__number">1,92</div>
+          <div class="repeat-visual__label">visualização por pessoa</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel interactions" id="interacoes" aria-labelledby="titulo-interacoes">
+      <div class="panel__inner interaction-grid reveal">
+        <div>
+          <div class="panel__number">04 · O que o público fez</div>
+          <p class="eyebrow">Resposta ao conteúdo</p>
+          <h2 id="titulo-interacoes">O gesto mais comum foi <em>curtir.</em></h2>
+          <p class="lead">Os 74 compartilhamentos também importam: alguém considerou o tema útil ou reconhecível o bastante para levá-lo a outra pessoa.</p>
+          <p class="interaction-note">Salvamentos e compartilhamentos ajudam a explicar a circulação. Comentários, reposts e novos seguidores ficaram bem abaixo das curtidas.</p>
+        </div>
+        <div class="bars" role="img" aria-label="Comparação das interações: 425 curtidas, 74 compartilhamentos, 32 salvamentos, 20 novos seguidores, 10 reposts e 5 comentários">
+          <div class="bar-item">
+            <span class="bar-item__label">Curtidas</span>
+            <span class="bar-item__track"><span class="bar-item__fill" style="--value: 100%"></span></span>
+            <strong class="bar-item__value">425</strong>
+          </div>
+          <div class="bar-item">
+            <span class="bar-item__label">Compartilhamentos</span>
+            <span class="bar-item__track"><span class="bar-item__fill" style="--value: 17.4%"></span></span>
+            <strong class="bar-item__value">74</strong>
+          </div>
+          <div class="bar-item">
+            <span class="bar-item__label">Salvamentos</span>
+            <span class="bar-item__track"><span class="bar-item__fill" style="--value: 7.5%"></span></span>
+            <strong class="bar-item__value">32</strong>
+          </div>
+          <div class="bar-item">
+            <span class="bar-item__label">Novos seguidores</span>
+            <span class="bar-item__track"><span class="bar-item__fill" style="--value: 4.7%"></span></span>
+            <strong class="bar-item__value">20</strong>
+          </div>
+          <div class="bar-item">
+            <span class="bar-item__label">Reposts</span>
+            <span class="bar-item__track"><span class="bar-item__fill" style="--value: 2.4%"></span></span>
+            <strong class="bar-item__value">10</strong>
+          </div>
+          <div class="bar-item">
+            <span class="bar-item__label">Comentários</span>
+            <span class="bar-item__track"><span class="bar-item__fill" style="--value: 1.2%"></span></span>
+            <strong class="bar-item__value">5</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel circulation" id="circulacao" aria-labelledby="titulo-circulacao">
+      <div class="panel__inner factor-layout reveal">
+        <div>
+          <div class="panel__number">05 · Por que circulou</div>
+          <p class="eyebrow">Quatro sinais do desempenho</p>
+          <h2 id="titulo-circulacao">O Reel facilitou a decisão de <span class="accent">continuar assistindo.</span></h2>
+          <p class="lead">A distribuição veio de uma combinação específica. O tema encontrou uma experiência comum e o vídeo entregou essa ideia sem exigir esforço demais.</p>
+        </div>
+        <div class="factors">
+          <article class="factor">
+            <div>
+              <h3>Interrupção visual</h3>
+              <p>O primeiro enquadramento criou contraste suficiente para interromper o movimento do feed.</p>
+            </div>
+          </article>
+          <article class="factor">
+            <div>
+              <h3>Tema emocionalmente reconhecível</h3>
+              <p>Ansiedade e autocobrança aparecem em situações que muitas mulheres identificam na própria rotina.</p>
+            </div>
+          </article>
+          <article class="factor">
+            <div>
+              <h3>Promessa simples</h3>
+              <p>O público entendeu cedo o que receberia ao continuar no vídeo, sem uma introdução longa.</p>
+            </div>
+          </article>
+          <article class="factor">
+            <div>
+              <h3>Informação fácil de compartilhar</h3>
+              <p>O conteúdo podia ser enviado a alguém sem contexto adicional, o que reduziu o atrito do compartilhamento.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel bond" id="vinculo" aria-labelledby="titulo-vinculo">
+      <div class="panel__inner reveal">
+        <div class="panel__number">06 · Alcance versus vínculo</div>
+        <p class="eyebrow">Duas respostas diferentes</p>
+        <h2 id="titulo-vinculo">Muita descoberta. <span style="color: var(--bc-deep);">Pouco crescimento do perfil.</span></h2>
+        <div class="contrast-layout">
+          <div class="contrast-block">
+            <div>
+              <span class="contrast-block__value">46.750</span>
+              <span class="contrast-block__label">visualizações</span>
+            </div>
+            <p>O tema atravessou a base atual e apresentou o conteúdo a um público amplo. O resultado principal foi descoberta e conscientização.</p>
+          </div>
+          <div class="contrast-divider" aria-hidden="true"></div>
+          <div class="contrast-block contrast-block--soft">
+            <div>
+              <span class="contrast-block__value">0,08%</span>
+              <span class="contrast-block__label">conversão aproximada de visualizadores em seguidores</span>
+            </div>
+            <p>Foram 20 novos seguidores. A atenção chegou, mas a relação entre o assunto do Reel e a identidade de Marina ainda pode ficar mais evidente.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel positioning" id="posicionamento" aria-labelledby="titulo-posicionamento">
+      <div class="panel__inner position-grid reveal">
+        <div>
+          <div class="panel__number">07 · A oportunidade</div>
+          <p class="eyebrow">Posicionamento</p>
+          <h2 id="titulo-posicionamento">Usar o alcance para apresentar o <span class="accent">repertório de Marina.</span></h2>
+          <p class="lead">O próximo conteúdo pode manter a porta de entrada que funcionou e acrescentar elementos que só poderiam vir desta profissional.</p>
+        </div>
+        <div class="position-map" aria-label="Caminho de posicionamento em três etapas">
+          <article class="position-step">
+            <strong>Começar pela situação reconhecível</strong>
+            <p>Uma cena de autocobrança na rotina mantém a proximidade com o tema que despertou atenção.</p>
+          </article>
+          <article class="position-step">
+            <strong>Incluir uma observação profissional</strong>
+            <p>Marina pode explicar o padrão que percebe, com linguagem responsável e sem aconselhamento terapêutico.</p>
+          </article>
+          <article class="position-step">
+            <strong>Fechar com continuidade editorial</strong>
+            <p>Uma referência a outros conteúdos do perfil ajuda a pessoa a reconhecer o território que Marina explora.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel next-test" id="proximo-teste" aria-labelledby="titulo-teste">
+      <div class="panel__inner reveal">
+        <div class="test-layout">
+          <div>
+            <div class="panel__number">08 · Próximo teste</div>
+            <p class="eyebrow">Três decisões objetivas</p>
+            <h2 id="titulo-teste">Repetir o que abriu atenção e observar o que gera <em>reconhecimento.</em></h2>
+          </div>
+          <div class="decisions">
+            <article class="decision">
+              <div>
+                <h3>Preservar o início visual</h3>
+                <p>Testar uma abertura com contraste e uma situação cotidiana ligada à autocobrança, mantendo a promessa fácil de entender.</p>
+              </div>
+            </article>
+            <article class="decision">
+              <div>
+                <h3>Assinar o raciocínio</h3>
+                <p>Inserir uma frase que conecte o assunto à forma como Marina observa ansiedade e rotina emocional no trabalho.</p>
+              </div>
+            </article>
+            <article class="decision">
+              <div>
+                <h3>Comparar as respostas</h3>
+                <p>Acompanhar visualizações por pessoa, compartilhamentos, visitas ao perfil e novos seguidores para entender onde o vínculo avançou.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+        <p class="closing-question">O próximo Reel será lembrado pelo tema ou também por quem explicou?</p>
+      </div>
+      <footer class="signature">
+        <span>Análise demonstrativa · cliente fictícia</span>
+        <span>Bianca Figueiredo</span>
+      </footer>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const panels = [...document.querySelectorAll('.panel')];
+      const navLinks = [...document.querySelectorAll('.section-nav a')];
+      const progress = document.getElementById('progressBar');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const updateProgress = () => {
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        const ratio = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+        const value = Math.min(100, Math.max(0, ratio * 100));
+        progress.style.width = `${value}%`;
+        progress.parentElement.setAttribute('role', 'progressbar');
+        progress.parentElement.setAttribute('aria-label', 'Progresso da apresentação');
+        progress.parentElement.setAttribute('aria-valuemin', '0');
+        progress.parentElement.setAttribute('aria-valuemax', '100');
+        progress.parentElement.setAttribute('aria-valuenow', Math.round(value));
+      };
+
+      const activeObserver = new IntersectionObserver((entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (!visible) return;
+        navLinks.forEach((link) => {
+          const active = link.getAttribute('href') === `#${visible.target.id}`;
+          if (active) link.setAttribute('aria-current', 'true');
+          else link.removeAttribute('aria-current');
+        });
+      }, { threshold: [0.35, 0.55, 0.75] });
+
+      panels.forEach((panel) => activeObserver.observe(panel));
+
+      if (reduceMotion) {
+        document.querySelectorAll('.reveal').forEach((item) => item.classList.add('is-visible'));
+      } else {
+        const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => entry.target.classList.toggle('is-visible', entry.isIntersecting));
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach((item) => revealObserver.observe(item));
+      }
+
+      document.addEventListener('keydown', (event) => {
+        if (!['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp'].includes(event.key)) return;
+        if (event.target.matches('a, button, input, textarea, select')) return;
+        const viewportMiddle = window.scrollY + window.innerHeight * 0.5;
+        const currentIndex = panels.reduce((best, panel, index) => {
+          const center = panel.offsetTop + panel.offsetHeight * 0.5;
+          return Math.abs(center - viewportMiddle) < Math.abs((panels[best].offsetTop + panels[best].offsetHeight * 0.5) - viewportMiddle) ? index : best;
+        }, 0);
+        const direction = ['ArrowDown', 'PageDown'].includes(event.key) ? 1 : -1;
+        const targetIndex = Math.min(panels.length - 1, Math.max(0, currentIndex + direction));
+        if (targetIndex !== currentIndex) {
+          event.preventDefault();
+          panels[targetIndex].scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+        }
+      });
+
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          updateProgress();
+          ticking = false;
+        });
+      }, { passive: true });
+
+      updateProgress();
+    })();
+  </script>
+</body>
+</html>
